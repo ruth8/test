@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .formItem >label:nth-child(1){
+            display: inline-block;
+            width: 80px;
+            text-align: right;
+        }
+    </style>
+    <script src="../js/jq.js"></script>
+</head>
+<body>
+    <div class="formItem">
+        <label for="name">name:</label><input type="text" id="name" autocomplete="off"><label></label>
+    </div>
+    <div class="formItem">
+        <label for="pw">password:</label><input type="text" id="pw" autocomplete="off"><label></label>
+    </div>
+    <div class="formItem">
+        <label for="mail">email:</label><input type="text" id="mail" autocomplete="off"><label></label>
+    </div>
+    <div class="formItem">
+        <label for="address">address:</label><input type="text" id="address" autocomplete="off"><label></label>
+    </div>
+    <div class="formItem">
+        <label for="ps">ps:</label><input type="text" id="ps" autocomplete="off"><label></label>
+    </div>
+    
+    <script>
+        $().ready(function(){
+            var validate = [
+                {
+                    name : 'name',
+                    rule : 'beString',
+                    msg : 'plz input string'
+                },
+                {
+                    name : 'pw',
+                    rule : 'beNumber',
+                    msg : 'plz input number'
+                },
+                {
+                    name : 'mail',
+                    rule : 'mail',
+                    msg : 'plz input mail'
+                },
+                {
+                    name : 'address',
+                    rule : 'required',
+                    msg : 'required'
+                },
+                {
+                    name : 'ps',
+                    rule :'lengthLimit(2,5)',
+                    msg : 'length should be [2,5]'
+                }
+            ]
+            var reg;
+            function choseRule(rule,min,max){
+                switch(rule){
+                    case "beString":
+                        reg = /[a-zA-Z]+/;
+                        break;
+                    case "beNumber":
+                        reg = /[0-9]+/;
+                        break;
+                    case "mail":
+                        reg = /[0-9]{1,5}@[a-zA-Z0-9]+\.com/;
+                        break;
+                    case "required":
+                        reg = /[\s\S]{1,}/;
+                        break;
+                    case "lengthLimit"+'('+min+','+max+')':
+                        reg =new RegExp("["+"\\s\\S"+"]{"+min+","+max+"}");
+                        break;
+                }
+                return reg;
+            }
+            function validateFn(target,val){
+                validate.map(function(v){
+                    if(v.name==target.attr('id')){
+                        // 长度限制，传入参数
+                        if(v.rule.indexOf('(') > -1){
+                            var rangeArr = v.rule.split(',');
+                            var min = rangeArr[0][rangeArr[0].length-1];
+                            var max = rangeArr[1][0];
+                        }
+                        var innerReg =choseRule(v.rule,min,max);
+                        var match = innerReg.test(val);
+                        if(!match){
+                            target.next().attr('for',v.name).text(v.msg);
+                        }else{
+                            target.next().text('');
+                        }
+                    }
+                })
+            }
+            $(".formItem input").on('blur input',function(){
+                var _this = $(this);
+                validateFn(_this,_this.val());
+            })
+            // on多个事件，中间以空格隔开
+        })
+    </script>
+</body>
+</html>
