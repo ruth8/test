@@ -25,3 +25,4 @@ str = '在div上第一个feature push了';
 str = '在div上第二个feature push了';
 str = '在div上第三个feature push了'
 
+str='88 night'
