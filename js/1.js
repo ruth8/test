@@ -14,4 +14,5 @@ time =7;
 time=8;
 time=9;
 time=10;
-var str = 'i am in dev'
+var str = 'i am in dev';
+str='第二次i am in dev';
