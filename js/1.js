@@ -17,3 +17,4 @@ time=10;
 var str = 'i am in dev';
 str='第二次i am in dev';
 str='第三次i am in dev';
+str = '在div上第一个feature push了'
