@@ -17,5 +17,11 @@ time=10;
 var str = 'i am in dev';
 str='第二次i am in dev';
 str='第三次i am in dev';
+
 str='第一次做清cookie commit1';
 str='第二次做清cookie commit1';
+
+str = '在div上第一个feature push了';
+str = '在div上第二个feature push了';
+str = '在div上第三个feature push了'
+
