@@ -27,3 +27,4 @@ str = '在div上第三个feature push了'
 
 str='88 night';
 str='dev feture1';
+str = 'dev feature2';
